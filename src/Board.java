@@ -1,4 +1,8 @@
 import java.util.ArrayList;
+//Z means ships put on board
+//O means miss
+//X means hit
+//line of X according to ship length = sink
 import java.util.Scanner;
 public class Board{
     Scanner s = new Scanner(System.in);
@@ -32,7 +36,7 @@ public class Board{
     //prints the board
     public void printBoard(){
         for (int i = 0; i < 10; i++){
-            System.out.print(i+"|");
+            System.out.print(Tester.num2Let(i)+"|");
             for (int j = 0; j < 10; j++ ){
                 System.out.print(board[i][j]+" ");
             }
@@ -157,7 +161,7 @@ public class Board{
         }
         else{
             //if no
-            Oboard[x][y] = "C";
+            Oboard[x][y] = "Z";
         }
     }
 
@@ -174,7 +178,7 @@ public class Board{
 
     public void printOboard(){
         for (int i = 0; i < 10; i++){
-            System.out.print(i+"|");
+            System.out.print(Tester.num2Let(i)+"|");
             for (int j = 0; j < 10; j++ ){
                 System.out.print(Oboard[i][j]+" ");
             }
@@ -183,5 +187,6 @@ public class Board{
         }
         System.out.println("-|-------------------");
         System.out.println(" |0 1 2 3 4 5 6 7 8 9");
+
     }
 }
