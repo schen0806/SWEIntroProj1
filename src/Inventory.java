@@ -3,12 +3,14 @@ public class Inventory {
     private ArrayList<Ship> ships;
     private int size;
     public Inventory() {
-        size = 1;
+        size = 5;
         ships = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             ships.add(new Ship());
         }
     }
+    //enable the user to choose ship length
+
     //print out the length of the ships(data for inventory)
     public int[] getInventory() {
         int[] data = new int[ships.size()];

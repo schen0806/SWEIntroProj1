@@ -52,27 +52,35 @@ public class Board{
         System.out.println("Player "+playerName+", it's your time to deploy your battleships. Here's the current board:");
         printBoard();
         System.out.println("Now in your inventory, you still have the ships with length of: "+inventory.printInventory());
-        int currentShipLength;
+        int currentShipLength = 0;
         //loop through inventory
         for (int i = 0; i < inventory.getSize(); i++){
-            currentShipLength = inventory.getInventory()[i];
             int direction =-1;
             int x = -1;
             int y = -1;
             int tailx = 0;
             int taily = 0;
             //validate the direction input
+            boolean validPlacement = false;
             boolean validDirection = false;
-            while (!validDirection){
-                System.out.println("The size of the current ship that you are deploying: "+currentShipLength);
-                System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
-                direction = s.nextInt();
-                if (direction == 1 || direction == 0){
-                    validDirection = true;
+            while (!validPlacement){
+                System.out.println("Ship length: (type in 1 - 5): ");
+                currentShipLength = s.nextInt();
+                if(currentShipLength <= 5 && currentShipLength >=1){
+                    System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
+                    direction = s.nextInt();
                 }
                 else{
-                    System.out.println("Invalid input!!!");
+                    System.out.println("Invalid ship length. Try again");
+                    System.out.println("Ship length: (type in 1 - 5): ");
+                    direction = s.nextInt();
                 }
+            }
+            if (direction == 1 || direction == 0){
+                validDirection = true;
+            }
+            else{
+                System.out.println("Invalid input!!!");
             }
 
             //validate the coordinate.
