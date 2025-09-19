@@ -12,25 +12,12 @@ public class Inventory {
     //enable the user to choose ship length
 
     //print out the length of the ships(data for inventory)
-    public int[] getInventory() {
-        int[] data = new int[ships.size()];
+    public void printInventory() {
         for (int i = 0; i < ships.size(); i++) {
-            data[i] = ships.get(i).getLength();
+            System.out.println(ships.get(i).getLength()+" ");
         }
-        return data;
     }
-
-    public int getSize(){
+    public int getSize() {
         return size;
-    }
-
-    //prints out the ships in the inventory
-    public String printInventory(){
-        StringBuilder text = new StringBuilder();
-        for (int i = 0; i < size; i++){
-            // length of ships[2-5 units:
-            text.append(ships.get(i).getLength()).append(", ");
-        }
-        return text.toString();
     }
 }

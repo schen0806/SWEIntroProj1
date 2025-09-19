@@ -51,8 +51,8 @@ public class Board{
     public void deploy(){
         System.out.println("Player "+playerName+", it's your time to deploy your battleships. Here's the current board:");
         printBoard();
-        System.out.println("Now in your inventory, you still have the ships with length of: "+inventory.printInventory());
-        int currentShipLength = 0;
+
+        int currentShipLength;
         //loop through inventory
         for (int i = 0; i < inventory.getSize(); i++){
             int direction =-1;
@@ -61,31 +61,27 @@ public class Board{
             int tailx = 0;
             int taily = 0;
             //validate the direction input
-            boolean validPlacement = false;
             boolean validDirection = false;
-            while (!validPlacement){
-                System.out.println("Ship length: (type in 1 - 5): ");
+            for(int j =0; j < 5; j++){
+                System.out.println("Ship length: (type in 2 - 6): ");
                 currentShipLength = s.nextInt();
-                if(currentShipLength <= 5 && currentShipLength >=1){
+                if(currentShipLength <= 6 && currentShipLength >=2){
                     System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
                     direction = s.nextInt();
                 }
                 else{
                     System.out.println("Invalid ship length. Try again");
-                    System.out.println("Ship length: (type in 1 - 5): ");
+                    System.out.println("Ship length: (type in 2 - 6): ");
+                    currentShipLength = s.nextInt();
+                }
+                if (direction == 1 || direction == 0){
+                    validDirection = true;
+                }
+                else{
+                    System.out.println("Invalid input!!!");
+                    System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
                     direction = s.nextInt();
                 }
-            }
-            if (direction == 1 || direction == 0){
-                validDirection = true;
-            }
-            else{
-                System.out.println("Invalid input!!!");
-            }
-
-            //validate the coordinate.
-            boolean validCoordinate = false;
-            while (!validCoordinate){
                 System.out.println("Where would you put it? Enter the top-left corner x-coordinate (0-9) (the top-left of the entire board is [0,0]");
                 x = s.nextInt();
                 System.out.println("Where would you put it? Enter the top-left corner y-coordinate (0-9) (the top-left of the entire board is [0,0]");
@@ -98,6 +94,12 @@ public class Board{
                     tailx = x+currentShipLength-1;
                     taily = y;
                 }
+            }
+
+            //validate the coordinate.
+            boolean validCoordinate = false;
+            while (!validCoordinate){
+
                 //System.out.print("DEBUG x="+x+", y="+y+", tailx="+tailx+", taily="+taily);
                 //System.out.println();
 

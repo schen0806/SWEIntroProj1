@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class Game {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         boolean GameOn = true;
         Scanner s = new Scanner(System.in);
         Inventory inventory = new Inventory();
@@ -9,21 +9,20 @@ public class Game {
         System.out.println("The second player's name:");
         Board player2 = new Board(inventory, s.nextLine());
         //initializing
-        System.out.println("Now leave the device to "+player1.getName()+" for deploying");
+        System.out.println("Now leave the device to " + player1.getName() + " for deploying");
         player1.deploy();
-        System.out.println("Now leave the device to "+player2.getName()+" for deploying");
+        System.out.println("Now leave the device to " + player2.getName() + " for deploying");
         player2.deploy();
 
         int round = 1;
-        while(GameOn){
+        while (GameOn) {
             //two alternating players
             Board currentPlayer;
             Board opponent;
-            if (round % 2 ==1){
+            if (round % 2 == 1) {
                 currentPlayer = player1;
                 opponent = player2;
-            }
-            else{
+            } else {
                 currentPlayer = player2;
                 opponent = player1;
             }
@@ -37,31 +36,30 @@ public class Game {
 
             //test if valid (and if the location have been hit before)
             boolean valid = false;
-            while (!valid){
-                System.out.println("Where do you want to attack on "+opponent.getName()+"? Enter the x axis(0-9)");
+            while (!valid) {
+                System.out.println("Where do you want to attack on " + opponent.getName() + "? Enter the x axis(0-9)");
                 y = s.nextInt();
                 System.out.println("Enter y axis(0-9)");
                 x = s.nextInt();
                 valid = currentPlayer.canHit(x, y);
                 //System.out.println(valid);
                 //if still not valid
-                if (!valid){
+                if (!valid) {
                     System.out.println("You've already hit that place before/out of bounds!");
-                }
-                else{
+                } else {
                     System.out.println("You hit your opponent's ship!");
                 }
             }
             //if valid, run
-            boolean result = opponent.getShoot(x,y);
-            currentPlayer.recordHit(x,y,result);
+            boolean result = opponent.getShoot(x, y);
+            currentPlayer.recordHit(x, y, result);
             //if hit ship
-            if (result){
+            if (result) {
                 System.out.println("Congratulations! You sank your opponent's ship!");
                 //System.out.println(opponent.getShipsLeft());
             }
-            if (opponent.getShipsLeft() <= 0){
-                System.out.println(currentPlayer.getName()+", you sunk the last ship of "+opponent.getName()+", you win!");
+            if (opponent.getShipsLeft() <= 0) {
+                System.out.println(currentPlayer.getName() + ", you sunk the last ship of " + opponent.getName() + ", you win!");
                 System.out.println("Game Over");
                 GameOn = false;
             }
