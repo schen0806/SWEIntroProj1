@@ -22,7 +22,8 @@ public class Game {
             if (round % 2 == 1) {
                 currentPlayer = player1;
                 opponent = player2;
-            } else {
+            }
+            else {
                 currentPlayer = player2;
                 opponent = player1;
             }
@@ -46,7 +47,8 @@ public class Game {
                 //if still not valid
                 if (!valid) {
                     System.out.println("You've already hit that place before/out of bounds!");
-                } else {
+                }
+                else {
                     System.out.println("You hit your opponent's ship!");
                 }
             }

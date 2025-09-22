@@ -55,57 +55,59 @@ public class Board{
         int currentShipLength;
         //loop through inventory
         for (int i = 0; i < inventory.getSize(); i++){
+            int currentShipLength;
             int direction =-1;
             int x = -1;
             int y = -1;
             int tailx = 0;
             int taily = 0;
             //validate the direction input
-            boolean validDirection = false;
-            for(int j =0; j < 5; j++){
-                System.out.println("Ship length: (type in 2 - 6): ");
-                currentShipLength = s.nextInt();
-                if(currentShipLength <= 6 && currentShipLength >=2){
-                    System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
-                    direction = s.nextInt();
-                }
-                else{
-                    System.out.println("Invalid ship length. Try again");
+            for(int j = 0; j < 5; j++){
+                boolean valid = false;
+                while (!valid){
                     System.out.println("Ship length: (type in 2 - 6): ");
                     currentShipLength = s.nextInt();
-                }
-                if (direction == 1 || direction == 0){
-                    validDirection = true;
-                }
-                else{
-                    System.out.println("Invalid input!!!");
-                    System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
-                    direction = s.nextInt();
-                }
-                System.out.println("Where would you put it? Enter the top-left corner x-coordinate (0-9) (the top-left of the entire board is [0,0]");
-                x = s.nextInt();
-                System.out.println("Where would you put it? Enter the top-left corner y-coordinate (0-9) (the top-left of the entire board is [0,0]");
-                y = s.nextInt();
-                if (direction == 0){
-                    taily = y+currentShipLength-1;
-                    tailx = x;
-                }
-                else {
-                    tailx = x+currentShipLength-1;
-                    taily = y;
+                    if (/*requirements meets */ currentShipLength > 6 || currentShipLength < 2){
+                        System.out.println("Invalid ship length. Try again");
+                        valid = true;
+                    }
+                    else{
+                        System.out.println("Do you want to place it vertically (0) or horizontally? (1): ");
+                        direction = s.nextInt();
+                        if (direction == 1 || direction == 0) {
+                            System.out.println("Where would you put it? Enter the top-left corner x-coordinate (0-9) (the top-left of the entire board is [0,0]");
+                            x = s.nextInt();
+                            System.out.println("Where would you put it? Enter the top-left corner y-coordinate (0-9) (the top-left of the entire board is [0,0]");
+                            y = s.nextInt();
+                            if (direction == 0) {
+                                taily = y + currentShipLength - 1;
+                                tailx = x;
+                            }
+                            else {
+                                tailx = x + currentShipLength - 1;
+                                taily = y;
+                            }
+                        }
+                        else{
+                            System.out.println("Invalid input!!!");
+                            System.out.println("Do you want to place it vertically (0) or horizontally? (1)  ");
+                            direction = s.nextInt();
+                        }
+                    }
                 }
             }
+        }
 
             //validate the coordinate.
-            boolean validCoordinate = false;
-            while (!validCoordinate){
+        boolean validCoordinate = false;
+        while (!validCoordinate){
 
                 //System.out.print("DEBUG x="+x+", y="+y+", tailx="+tailx+", taily="+taily);
                 //System.out.println();
 
                 //if statements
                 //if the starting point is in the board
-                if (!(x < 0 || y < 0 || x > 10 || y > 10)){
+            if (!(x < 0 || y < 0 || x > 10 || y > 10)){
                     if (!(tailx < 0 || taily < 0 || tailx > 10 || taily > 10)){
                         boolean a = true;
                         //if any parts of the ship collated other ships, invalid
@@ -197,6 +199,5 @@ public class Board{
         }
         System.out.println("-|-------------------");
         System.out.println(" |0 1 2 3 4 5 6 7 8 9");
-
     }
 }
