@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-//Z means ships put on board
-//O means miss
-//X means hit
 //line of X according to ship length = sink
 import java.util.Scanner;
 public class Board{
@@ -96,19 +93,19 @@ public class Board{
                     taily = y;
                 }
                 //System.out.print("DEBUG x="+x+", y="+y+", tailx="+tailx+", taily="+taily);
-                //System.out.println();
+                System.out.println();
 
                 //if statements
-                //if the starting point is in the board
                 if (!(x < 0 || y < 0 || x > 9 || y > 9)){
                     if (!(tailx < 0 || taily < 0 || tailx > 9 || taily > 9)){
                         boolean a = true;
                         //if any parts of the ship collated other ships, invalid
                         for (int j = x; j < tailx+1; j++){
-                            for (int n = y; n < taily; n++){
-                                if (board[j][n].equals("Z")) {
+                            for (int n = y; n < taily+1; n++){
+                                //System.out.println(j+", "+n);
+                                //System.out.println(board[n][j]);
+                                if (board[n][j].equals("Z")) {
                                     a = false;
-                                    break;
                                 }
                             }
                         }
@@ -150,23 +147,20 @@ public class Board{
     }
 
     public boolean getShoot(int x, int y){
-        //f=missed; t=got hit
-        //opponent from the Game method choose location to attack:(x(0-10), y(0-10))
-        boolean result = board[x][y].equals("Z");
-        if(result){
-            board[x][y] = "X";
-        }
+        //M=missed; H=got hit
+        //opponent from the Game method choose location to attack:(x(0-9), y(0-9))
+        boolean result = !(board[x][y].equals("M"));
         return result;
     }
 
     public void recordHit(int x, int y, boolean result){
         if (result){
             //if hit ship
-            Oboard[x][y] = "X";
+            Oboard[x][y] = "H";
         }
         else{
             //if no
-            Oboard[x][y] = "Z";
+            Oboard[x][y] = "M";
         }
     }
 

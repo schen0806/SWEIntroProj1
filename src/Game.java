@@ -9,9 +9,11 @@ public class Game {
         System.out.println("The second player's name:");
         Board player2 = new Board(inventory, s.nextLine());
         //initializing
-        System.out.println("Now leave the device to " + player1.getName() + " for deploying");
+        System.out.println("Now leave the device to " + player1.getName() + " for deploying. Press enter to continue.");
+        s.nextLine();
         player1.deploy();
-        System.out.println("Now leave the device to " + player2.getName() + " for deploying");
+        System.out.println("Now leave the device to " + player2.getName() + " for deploying. Press enter to continue.");
+        s.nextLine();
         player2.deploy();
 
         int round = 1;
@@ -22,12 +24,13 @@ public class Game {
             if (round % 2 == 1) {
                 currentPlayer = player1;
                 opponent = player2;
-            }
-            else {
+            } else {
                 currentPlayer = player2;
                 opponent = player1;
             }
-//            System.out.println("Leave the device to "+currentPlayer.getName()+", because its his turn to attack. Here's the note you took of the opponent's board:");
+            System.out.println("Leave the device to "+currentPlayer.getName()+", because its his turn to attack.");
+            s.nextLine();
+            System.out.println("Here's the note you took of the opponent's board:");
             System.out.println("--------------");
             currentPlayer.printOboard();
             System.out.println("--------------");
@@ -48,18 +51,16 @@ public class Game {
                 if (!valid) {
                     System.out.println("You've already hit that place before/out of bounds!");
                 }
-                else {
-                    System.out.println("You hit your opponent's ship!");
-                }
             }
             //if valid, run
             boolean result = opponent.getShoot(x, y);
             currentPlayer.recordHit(x, y, result);
             //if hit ship
             if (result) {
-                System.out.println("Congratulations! You sank your opponent's ship!");
+                System.out.println("Congratulations! You hit your opponent's ship!");
                 //System.out.println(opponent.getShipsLeft());
             }
+            currentPlayer.printOboard();
             if (opponent.getShipsLeft() <= 0) {
                 System.out.println(currentPlayer.getName() + ", you sunk the last ship of " + opponent.getName() + ", you win!");
                 System.out.println("Game Over");
